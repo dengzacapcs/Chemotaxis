@@ -27,7 +27,10 @@
  	return 0;
  }
  void addBacteria(int x, int y){
- 	b = java.util.Arrays.copyOf(b, b.length + 1);
+ 	Bacteria[] temp = new Bacteria[b.length + 1];
+ 	arrayCopy(b, temp);
+ 	b= temp;
+ 	//b = java.util.Arrays.copyOf(b, b.length + 1);
  	b[b.length - 1] = new Bacteria(x,y,(int)(Math.random()*255));
  }
  class Bacteria    
