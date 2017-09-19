@@ -1,13 +1,51 @@
- //declare bacteria variables here   
+ //declare bacteria variables here 
+ Bacteria[] b;  
  void setup()   
- {     
- 	//initialize bacteria variables here   
+ {   
+ 	size(500,500)  ;
+ 	b =new Bacteria[5];
+ 	for (int i = 0; i<5;i++){
+ 		b[i] = new Bacteria(250,250,(int)(Math.random()*255));
+ 	}
  }   
  void draw()   
  {    
- 	//move and show the bacteria   
+ 	background(0);
+ 	for (int i = 0; i<b.length;i++){
+ 		b[i].move();
+ 		b[i].show();
+ 	}
  }  
+ void addBacteria(int x, int y){
+ 	b = java.util.Arrays.copyOf(b, b.length + 1);
+ 	b[b.length - 1] = new Bacteria(x,y,(int)(Math.random()*255));
+ }
  class Bacteria    
- {     
- 	//lots of java!   
+ {
+ 	int x, y, col,age;     
+ 	Bacteria(int a, int b, int c){
+ 		x = a;
+ 		y = b;
+ 		col = c;
+
+ 		age=0;
+ 	} 
+
+
+ 	void move(){
+ 		int dx = mouseX -x;
+ 		int dy = mouseY - y;
+ 		x += Math.random()*5-2 + 2*Math.signum(dx);
+ 		y += Math.random()*5-2 + 2*Math.signum(dy);
+ 		int dist = dx * dx + dy * dy;
+ 		if (dist < 5&& age>100){
+ 			addBacteria(mouseX, mouseY);
+ 		}
+ 		age++;
+ 	}
+ 	void show(){
+ 		fill(col);
+ 		ellipse(x,y,age/10,age/10);
+ 	}
+
  }    
